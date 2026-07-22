@@ -1,13 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Layout } from "../components/Layout";
-import AnimatedContent from "../components/AnimatedContent";
-import PixelTransition from "../components/PixelTransition";
-import DecryptedText from "../components/DecryptedText";
-import PixelCard from "../components/PixelCard";
-import StarBorder from "../components/StarBorder";
-import { HeroParallax, type ParallaxProduct } from "../components/HeroParallax";
-import MagicContainer from "../components/MagicContainer";
+import AnimatedContent from "../components/home/AnimatedContent";
+import PixelTransition from "../components/home/PixelTransition";
+import DecryptedText from "../components/home/DecryptedText";
+import PixelCard from "../components/home/PixelCard";
+import StarBorder from "../components/home/StarBorder";
+import { HeroParallax, type ParallaxProduct } from "../components/home/HeroParallax";
+import MagicContainer from "../components/home/MagicContainer";
 
 export const Route = createFileRoute("/")({
   component: Home,

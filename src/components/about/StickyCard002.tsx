@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef, useState } from "react";
 
-import { cn } from "../lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface CardData {
   id: number | string;

@@ -7,7 +7,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css";
 
-import { cn } from "../lib/utils";
+import { cn } from "../../lib/utils";
 
 const Skiper49 = () => {
   const images = [

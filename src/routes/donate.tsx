@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { Layout } from "../components/Layout";
 import FadeContent from "../components/FadeContent";
-import Silk from "../components/Silk";
+import Silk from "../components/donate/Silk";
 
 export const Route = createFileRoute("/donate")({
   head: () => ({

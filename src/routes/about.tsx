@@ -1,17 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Layout } from "../components/Layout";
-import { AboutTrace } from "../components/AboutTrace";
+import { AboutTrace } from "../components/about/AboutTrace";
 import FadeContent from "../components/FadeContent";
 
-import ProgramCard from "../components/ProgramCard";
-import AnimatedList from "../components/AnimatedList";
-import SpecularButton from "../components/SpecularButton";
-import { Skiper19 } from "../components/Skiper19";
-import { Skiper17 as PartnersCards } from "../components/StickyCard002";
-import { Skiper49 as FlagshipCarousel } from "../components/Carousel003";
-import { LeadershipSpider } from "../components/LeadershipSpider";
-import GlareHover from "../components/GlareHover";
+import ProgramCard from "../components/about/ProgramCard";
+import AnimatedList from "../components/about/AnimatedList";
+import SpecularButton from "../components/about/SpecularButton";
+import { Skiper17 as PartnersCards } from "../components/about/StickyCard002";
+import { Skiper49 as FlagshipCarousel } from "../components/about/Carousel003";
+import { LeadershipSpider } from "../components/about/LeadershipSpider";
+import GlareHover from "../components/about/GlareHover";
 
 export const Route = createFileRoute("/about")({
   head: () => ({

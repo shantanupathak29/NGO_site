@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Layout } from "../components/Layout";
-import MasonryGrid from "../components/MasonryGrid";
-import WaveBackground from "../components/WaveBackground";
+import MasonryGrid from "../components/gallery/MasonryGrid";
+import WaveBackground from "../components/gallery/WaveBackground";
 
 export const Route = createFileRoute("/gallery")({
   head: () => ({

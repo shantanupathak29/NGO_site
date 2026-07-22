@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Layout } from "../components/Layout";
-import { CrowdCanvas } from "../components/CrowdCanvas";
-import Grainient from "../components/Grainient";
+import { CrowdCanvas } from "../components/contact/CrowdCanvas";
+import Grainient from "../components/contact/Grainient";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
