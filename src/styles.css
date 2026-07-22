@@ -17,6 +17,9 @@
   --color-outline: #BA90C6;
 }
 
+html {
+  background-color: #2A1B3D;
+}
 html, body { 
   font-family: "Poppins", ui-sans-serif, system-ui, sans-serif;
   max-width: 100vw;

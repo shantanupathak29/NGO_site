@@ -43,12 +43,12 @@ const uniqueImages = [
   { src: `${P}DSCI0319.jpg`, alt: "Bundelkhand Rural Landscape" },
   { src: `${P}DSCI0469.jpg`, alt: "Field Operations & Survey" },
   { src: `${P}PICT1279.jpg`, alt: "Local Community Interaction" },
-  { src: `${P}WhatsApp Image 2026-07-16 at 00.15.39 (1).jpeg`, alt: "Millets Revival Workshop" },
-  { src: `${P}WhatsApp Image 2026-07-16 at 00.15.39.jpeg`, alt: "Exposure Visit Delegation" },
-  { src: `${P}WhatsApp Image 2026-07-16 at 00.15.40 (1).jpeg`, alt: "Farmer Training Assembly" },
-  { src: `${P}WhatsApp Image 2026-07-16 at 00.15.40.jpeg`, alt: "JNKVV Facilitation Visit" },
-  { src: `${P}WhatsApp Image 2026-07-16 at 00.15.41 (1).jpeg`, alt: "Agriculture Officer Briefing" },
-  { src: `${P}WhatsApp Image 2026-07-16 at 00.15.41.jpeg`, alt: "Medicinal Plants Board Tour" },
+  { src: `${P}WhatsApp-Image-2026-07-16-at-00.15.39-1.jpeg`, alt: "Millets Revival Workshop" },
+  { src: `${P}WhatsApp-Image-2026-07-16-at-00.15.39.jpeg`, alt: "Exposure Visit Delegation" },
+  { src: `${P}WhatsApp-Image-2026-07-16-at-00.15.40-1.jpeg`, alt: "Farmer Training Assembly" },
+  { src: `${P}WhatsApp-Image-2026-07-16-at-00.15.40.jpeg`, alt: "JNKVV Facilitation Visit" },
+  { src: `${P}WhatsApp-Image-2026-07-16-at-00.15.41-1.jpeg`, alt: "Agriculture Officer Briefing" },
+  { src: `${P}WhatsApp-Image-2026-07-16-at-00.15.41.jpeg`, alt: "Medicinal Plants Board Tour" },
   { src: `${P}WhatsApp-Image-2021-07-24-at-16.20.47-1024x576.jpeg`, alt: "Self Help Group Assembly" },
   { src: `${P}WhatsApp-Image-2021-07-26-at-11.39.13-1024x576.jpeg`, alt: "Women Empowerment Drive" },
   { src: `${P}WhatsApp-Image-2021-11-08-at-15.23.07-1-1024x576.jpeg`, alt: "Community Health Campaign" },
@@ -82,13 +82,13 @@ function Gallery() {
       <Layout>
         <div className="relative min-h-screen py-16">
           <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10">
-            <div className="text-center space-y-4 mb-16 bg-[#FDF4F5]/85 backdrop-blur-xl p-8 rounded-3xl border border-[#BA90C6] shadow-2xl max-w-3xl mx-auto">
-              <h1 className="text-4xl md:text-5xl font-extrabold text-[#BA90C6]">Our Gallery</h1>
-              <p className="text-[#5C326F] font-bold max-w-2xl mx-auto">
+            <div className="text-center space-y-4 mb-16 bg-[#2A1B3D]/85 md:bg-[#FDF4F5]/85 backdrop-blur-xl p-8 rounded-3xl border border-[#E8A0BF]/40 md:border-[#BA90C6] shadow-2xl max-w-3xl mx-auto transition-colors">
+              <h1 className="text-4xl md:text-5xl font-extrabold text-[#E8A0BF] md:text-[#BA90C6] transition-colors">Our Gallery</h1>
+              <p className="text-[#FDF4F5]/90 md:text-[#5C326F] font-bold max-w-2xl mx-auto transition-colors">
                 Glimpses of our field work, community trainings, and programs across Bundelkhand.
               </p>
             </div>
-            <div className="bg-[#FDF4F5]/70 backdrop-blur-md p-6 rounded-3xl border border-[#BA90C6]/40 shadow-xl">
+            <div className="bg-[#2A1B3D]/80 md:bg-[#FDF4F5]/70 backdrop-blur-md p-6 rounded-3xl border border-[#E8A0BF]/30 md:border-[#BA90C6]/40 shadow-xl transition-colors">
               <MasonryGrid items={items} />
             </div>
           </div>
