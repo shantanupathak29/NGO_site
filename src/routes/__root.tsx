@@ -4,14 +4,12 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
-  HeadContent,
-  Scripts,
-  ScrollRestoration,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect } from "react";
 import Lenis from "lenis";
-
-import appCss from "../styles.css?url";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import PrimeIntro from "../components/PrimeIntro";
 
 function NotFoundComponent() {
   return (
@@ -20,7 +18,10 @@ function NotFoundComponent() {
         <h1 className="text-7xl font-bold text-[#BA90C6]">404</h1>
         <h2 className="mt-4 text-xl font-semibold">Page not found</h2>
         <div className="mt-6">
-          <Link to="/" className="inline-flex items-center rounded-full bg-[#E8A0BF] px-6 py-3 text-sm font-medium text-white hover:bg-[#BA90C6] transition-colors">
+          <Link
+            to="/"
+            className="inline-flex items-center rounded-full bg-[#E8A0BF] px-6 py-3 text-sm font-medium text-white hover:bg-[#BA90C6] transition-colors"
+          >
             Go home
           </Link>
         </div>
@@ -39,7 +40,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
       <div className="max-w-md text-center">
         <h1 className="text-xl font-semibold">This page didn't load</h1>
         <button
-          onClick={() => { router.invalidate(); reset(); }}
+          onClick={() => {
+            router.invalidate();
+            reset();
+          }}
           className="mt-6 rounded-full bg-[#E8A0BF] px-6 py-3 text-sm font-medium text-white hover:bg-[#BA90C6]"
         >
           Try again
@@ -50,49 +54,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Pragati Path - People-centered development in Bundelkhand" },
-      { name: "description", content: "Pragati Path is a non-profit dedicated to people-centered development in the Bundelkhand region since 2001." },
-      { property: "og:title", content: "Pragati Path - People-centered development in Bundelkhand" },
-      { property: "og:description", content: "Empowering rural communities across Bundelkhand since 2001." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [
-      { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.png", type: "image/png" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" },
-    ],
-  }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
-
-function RootShell({ children }: { children: ReactNode }) {
-  return (
-    <html lang="en">
-      <head><HeadContent /></head>
-      <body>
-        {children}
-        <ScrollRestoration />
-        <Scripts />
-      </body>
-    </html>
-  );
-}
-
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import PrimeIntro from "../components/PrimeIntro";
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
