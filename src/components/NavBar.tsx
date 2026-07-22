@@ -63,7 +63,6 @@ const spanVariants = {
 
 export default function NavBar() {
   const location = useLocation();
-  const navigate = useNavigate();
   const [hovered, setHovered] = useState<number | null>(null);
   const [hidden, setHidden] = useState(false);
   const lastYRef = useRef(0);
