@@ -39,23 +39,23 @@ export function HeroParallax({ products }: { products: ParallaxProduct[] }) {
     >
       {/* Text overlay — sticky to viewport, middle-left */}
       <div className="sticky top-0 h-screen w-full z-30 pointer-events-none flex items-center justify-center px-4">
-        <div className="max-w-4xl w-full mx-auto px-5 sm:px-8 md:px-12 py-5 sm:py-8 md:py-14 pointer-events-auto bg-white/40 sm:bg-white/30 backdrop-blur-xl rounded-3xl border border-white/50 sm:border-white/40 shadow-2xl text-center translate-y-4 sm:translate-y-8 md:translate-y-16 lg:translate-y-28">
-          <p className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-[0.25em] sm:tracking-[0.35em] uppercase text-[#BA90C6] mb-2 sm:mb-4">
+        <div className="max-w-4xl w-full mx-auto px-5 sm:px-8 md:px-12 py-16 sm:py-8 md:py-14 pointer-events-auto bg-white/40 sm:bg-white/30 backdrop-blur-xl rounded-3xl border border-white/50 sm:border-white/40 shadow-2xl text-center translate-y-4 sm:translate-y-8 md:translate-y-16 lg:translate-y-28">
+          <p className="text-base sm:text-xs md:text-sm font-semibold tracking-[0.25em] sm:tracking-[0.35em] uppercase text-[#BA90C6] mb-3 sm:mb-4">
             Established 2001
           </p>
-          <h1 className="text-2xl sm:text-[3.25rem] md:text-[4rem] font-extrabold text-[#2A1B3D] leading-tight sm:leading-[1.05]" style={{ fontFamily: "'Poppins', sans-serif" }}>
+          <h1 className="text-4xl sm:text-[3.25rem] md:text-[4rem] font-extrabold text-[#2A1B3D] leading-tight sm:leading-[1.05]" style={{ fontFamily: "'Poppins', sans-serif" }}>
             Welcome to <span className="text-[#BA90C6] block xs:inline">Pragati Path</span>
           </h1>
-          <p className="text-xs sm:text-base md:text-lg mt-3 sm:mt-5 text-[#2A1B3D]/75 font-medium leading-relaxed max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg mt-4 sm:mt-5 text-[#2A1B3D]/75 font-medium leading-relaxed max-w-2xl mx-auto">
             Dedicated to people-centered development in the Bundelkhand region, fostering empowerment and sustainable growth since 2001.
           </p>
-          <div className="mt-5 sm:mt-8">
+          <div className="mt-6 sm:mt-8">
             <Link
               to="/about"
-              className="inline-flex items-center bg-[#2A1B3D] text-[#FDF4F5] text-xs sm:text-sm font-semibold px-5 sm:px-8 py-3 sm:py-4 rounded-full shadow-lg hover:bg-[#BA90C6] transition-all hover:scale-105"
+              className="inline-flex items-center bg-[#2A1B3D] text-[#FDF4F5] text-sm sm:text-sm font-semibold px-6 sm:px-8 py-3.5 sm:py-4 rounded-full shadow-lg hover:bg-[#BA90C6] transition-all hover:scale-105"
             >
               Learn About Our Work
-              <span className="material-symbols-outlined ml-1.5 sm:ml-2 text-sm sm:text-base">arrow_forward</span>
+              <span className="material-symbols-outlined ml-2 sm:ml-2 text-base sm:text-base">arrow_forward</span>
             </Link>
           </div>
         </div>
