@@ -54,7 +54,7 @@ function Contact() {
   return (
     <>
       {/* Grainient WebGL Background Requirement 14 */}
-      <div aria-hidden className="fixed inset-0 -z-10 pointer-events-none">
+      <div aria-hidden className="fixed -top-[20vh] -bottom-[20vh] left-0 right-0 -z-10 pointer-events-none md:inset-0">
         <Grainient
           color1="#C0DBEA"
           color2="#E8A0BF"

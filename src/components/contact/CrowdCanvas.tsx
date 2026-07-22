@@ -93,12 +93,20 @@ export function CrowdCanvas() {
       }
     };
 
+    let lastWidth = 0;
     const resize = () => {
-      stage.width = canvas.clientWidth;
+      const newWidth = canvas.clientWidth;
+      const isWidthChange = lastWidth !== newWidth && lastWidth !== 0;
+      
+      stage.width = newWidth;
       stage.height = canvas.clientHeight;
       canvas.width = stage.width * devicePixelRatio;
       canvas.height = stage.height * devicePixelRatio;
-      peeps.forEach(resetPeep);
+      
+      if (lastWidth === 0 || isWidthChange) {
+        peeps.forEach(resetPeep);
+      }
+      lastWidth = newWidth;
     };
 
     createPeeps(28);

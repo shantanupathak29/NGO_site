@@ -56,7 +56,7 @@ function About() {
     <>
       <div
         aria-hidden
-        className="fixed inset-0 -z-10 pointer-events-none transition-colors duration-300"
+        className="fixed -top-[20vh] -bottom-[20vh] left-0 right-0 -z-10 pointer-events-none transition-colors duration-300 md:inset-0"
         style={{ backgroundColor: bg }}
       />
       <Layout>
