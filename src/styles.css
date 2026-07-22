@@ -23,10 +23,8 @@ html, body {
   overflow-x: hidden;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  background-color: #2A1B3D;
 }
 body {
-  background-color: #2A1B3D;
   color: var(--color-foreground);
   -webkit-font-smoothing: antialiased;
 }
