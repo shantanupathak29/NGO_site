@@ -1,15 +1,39 @@
 /* eslint-disable react/no-unknown-property */
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { useRef, useMemo, useLayoutEffect } from 'react';
+import React, { useRef, useMemo, useLayoutEffect, Component, ReactNode } from 'react';
 import { Color, Mesh, ShaderMaterial } from 'three';
 
+class WebGLErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
+  constructor(props: { children: ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: unknown) {
+    console.warn("Silk WebGL context creation/render failed:", error);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return null;
+    }
+    return this.props.children;
+  }
+}
+
 const hexToNormalizedRGB = (hex: string): [number, number, number] => {
-  hex = hex.replace('#', '');
-  return [
-    parseInt(hex.slice(0, 2), 16) / 255,
-    parseInt(hex.slice(2, 4), 16) / 255,
-    parseInt(hex.slice(4, 6), 16) / 255
-  ];
+  if (!hex || typeof hex !== 'string') return [0.9, 0.6, 0.75];
+  const cleanHex = hex.replace('#', '');
+  if (cleanHex.length !== 6) return [0.9, 0.6, 0.75];
+  const r = parseInt(cleanHex.slice(0, 2), 16);
+  const g = parseInt(cleanHex.slice(2, 4), 16);
+  const b = parseInt(cleanHex.slice(4, 6), 16);
+  if (isNaN(r) || isNaN(g) || isNaN(b)) return [0.9, 0.6, 0.75];
+  return [r / 255, g / 255, b / 255];
 };
 
 const vertexShader = `
@@ -134,17 +158,20 @@ const Silk = ({ speed = 5, scale = 1, color = '#E8A0BF', noiseIntensity = 1.5, r
   );
 
   return (
-    <div className="fixed inset-0 w-screen h-screen pointer-events-none overflow-hidden z-0">
-      <Canvas
-        dpr={[1, 2]}
-        frameloop="always"
-        style={{ width: '100vw', height: '100vh', position: 'fixed', top: 0, left: 0, pointerEvents: 'none' }}
-        gl={{ alpha: true, antialias: true }}
-      >
-        <SilkPlane uniforms={uniforms} color={color} />
-      </Canvas>
-    </div>
+    <WebGLErrorBoundary>
+      <div className="fixed inset-0 w-screen h-screen pointer-events-none overflow-hidden z-0">
+        <Canvas
+          dpr={[1, 2]}
+          frameloop="always"
+          style={{ width: '100vw', height: '100vh', position: 'fixed', top: 0, left: 0, pointerEvents: 'none' }}
+          gl={{ alpha: true, antialias: true }}
+        >
+          <SilkPlane uniforms={uniforms} color={color} />
+        </Canvas>
+      </div>
+    </WebGLErrorBoundary>
   );
 };
 
 export default Silk;
+

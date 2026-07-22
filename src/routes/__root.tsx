@@ -110,8 +110,6 @@ function RootComponent() {
       smoothWheel: true,
       wheelMultiplier: 1.0,
       touchMultiplier: 2.0,
-      syncTouch: true,
-      syncTouchInertia: true,
     });
 
     lenis.on("scroll", ScrollTrigger.update);

@@ -60,35 +60,39 @@ export const WaveBackground: React.FC<WaveBackgroundProps> = ({
     ];
 
     const render = () => {
-      ctx.clearRect(0, 0, width, height);
+      try {
+        ctx.clearRect(0, 0, width, height);
 
-      // Soft background fill
-      ctx.fillStyle = colors[3] || "#FDF4F5";
-      ctx.fillRect(0, 0, width, height);
+        // Soft background fill
+        ctx.fillStyle = colors[3] || "#FDF4F5";
+        ctx.fillRect(0, 0, width, height);
 
-      step += 1;
+        step += 1;
 
-      waveLines.forEach((wave) => {
-        ctx.beginPath();
-        ctx.fillStyle = wave.color + "55"; // 33% opacity for soft layered waves
+        waveLines.forEach((wave) => {
+          ctx.beginPath();
+          ctx.fillStyle = (wave.color || "#E8A0BF") + "55"; // 33% opacity for soft layered waves
 
-        const baseHeight = height * wave.offset;
+          const baseHeight = height * wave.offset;
 
-        ctx.moveTo(0, height);
-        ctx.lineTo(0, baseHeight);
+          ctx.moveTo(0, height);
+          ctx.lineTo(0, baseHeight);
 
-        for (let x = 0; x <= width; x += 10) {
-          const y =
-            baseHeight +
-            Math.sin(x * wave.wavelength + step * wave.speed) * wave.amplitude +
-            Math.cos(x * 0.002 + step * 0.003) * 15;
-          ctx.lineTo(x, y);
-        }
+          for (let x = 0; x <= width; x += 10) {
+            const y =
+              baseHeight +
+              Math.sin(x * wave.wavelength + step * wave.speed) * wave.amplitude +
+              Math.cos(x * 0.002 + step * 0.003) * 15;
+            ctx.lineTo(x, y);
+          }
 
-        ctx.lineTo(width, height);
-        ctx.closePath();
-        ctx.fill();
-      });
+          ctx.lineTo(width, height);
+          ctx.closePath();
+          ctx.fill();
+        });
+      } catch (err) {
+        console.warn("WaveBackground render error:", err);
+      }
 
       animationFrameId = requestAnimationFrame(render);
     };
