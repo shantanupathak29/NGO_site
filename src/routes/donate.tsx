@@ -14,6 +14,17 @@ export const Route = createFileRoute("/donate")({
     ],
   }),
   component: Donate,
+  errorComponent: ({ error }) => {
+    console.error("Donate Route Error:", error);
+    return (
+      <Layout>
+        <div className="py-32 text-center max-w-xl mx-auto px-4">
+          <h2 className="text-3xl font-extrabold text-[#5C326F]">Ways to Give</h2>
+          <p className="mt-4 text-[#2A1B3D] font-semibold">Your contribution directly empowers grassroots livelihoods across Bundelkhand.</p>
+        </div>
+      </Layout>
+    );
+  },
 });
 
 const projects = [

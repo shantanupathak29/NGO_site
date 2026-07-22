@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useLocation, useNavigate } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 
 const HomeIcon = ({ className = "w-5 h-5" }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -119,9 +119,9 @@ export default function NavBar() {
           const isExpanded = isSelected || isHovered;
 
           return (
-            <button
+            <Link
               key={tab.title}
-              onClick={() => navigate({ to: tab.to })}
+              to={tab.to}
               onMouseEnter={() => setHovered(index)}
               className={`relative z-10 flex items-center rounded-full px-2.5 sm:px-4 py-1.5 sm:py-2.5 text-[11px] sm:text-xs md:text-sm font-bold transition-colors focus:outline-none shrink-0 
                 ${isSelected
@@ -154,7 +154,7 @@ export default function NavBar() {
                   )}
                 </AnimatePresence>
               </span>
-            </button>
+            </Link>
           );
         })}
       </div>

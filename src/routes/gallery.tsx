@@ -13,6 +13,17 @@ export const Route = createFileRoute("/gallery")({
     ],
   }),
   component: Gallery,
+  errorComponent: ({ error }) => {
+    console.error("Gallery Route Error:", error);
+    return (
+      <Layout>
+        <div className="py-32 text-center max-w-xl mx-auto px-4">
+          <h2 className="text-3xl font-extrabold text-[#BA90C6]">Our Gallery</h2>
+          <p className="mt-4 text-[#2A1B3D] font-medium">Glimpses of our field work and community programs across Bundelkhand.</p>
+        </div>
+      </Layout>
+    );
+  },
 });
 
 const P = "/photos/";
