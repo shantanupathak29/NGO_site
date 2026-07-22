@@ -6,8 +6,10 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
+    "build:spa": "vite build --config vite.spa.config.ts",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
+    "preview:spa": "vite preview --config vite.spa.config.ts --outDir dist/spa",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
