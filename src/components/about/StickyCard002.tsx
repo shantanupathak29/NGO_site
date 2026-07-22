@@ -336,39 +336,48 @@ const Skiper17 = () => {
         })}
       </div>
 
-      {/* Mobile/Tablet Grid View with Hover Scale */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:hidden gap-5">
-        {defaultCards.map((card) => (
-          <div
-            key={card.id}
-            className="bg-[#FDF4F5]/90 backdrop-blur-xl rounded-3xl p-6 border border-[#BA90C6] shadow-lg hover:shadow-2xl hover:shadow-[#E8A0BF]/30 hover:border-[#E8A0BF] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"
-          >
-            <div className="space-y-4">
-              <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-2xl bg-[#BA90C6]/20 border border-[#BA90C6]/40 flex items-center justify-center text-[#8E5B9A] shrink-0">
-                    <span className="material-symbols-outlined text-2xl">{card.icon}</span>
+      {/* Mobile/Tablet Swipe Carousel View */}
+      <div className="lg:hidden space-y-3">
+        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-6 no-scrollbar -mx-4 px-4 sm:-mx-6 sm:px-6">
+          {defaultCards.map((card) => (
+            <div
+              key={card.id}
+              className="w-[85vw] sm:w-[350px] shrink-0 snap-center bg-[#FDF4F5]/90 backdrop-blur-xl rounded-3xl p-6 border border-[#BA90C6] shadow-lg hover:shadow-2xl hover:shadow-[#E8A0BF]/30 hover:border-[#E8A0BF] transition-all duration-300 flex flex-col justify-between"
+            >
+              <div className="space-y-4">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-11 h-11 rounded-2xl bg-[#BA90C6]/20 border border-[#BA90C6]/40 flex items-center justify-center text-[#8E5B9A] shrink-0">
+                      <span className="material-symbols-outlined text-2xl">{card.icon}</span>
+                    </div>
+                    <h4 className="text-base font-extrabold text-[#2A1B3D]">{card.category}</h4>
                   </div>
-                  <h4 className="text-base font-extrabold text-[#2A1B3D]">{card.category}</h4>
+                  <span className="bg-[#BA90C6]/15 text-[#8E5B9A] text-[10px] font-bold px-2.5 py-1 rounded-full border border-[#BA90C6]/30 shrink-0">
+                    {card.partners?.length} {card.partners?.length === 1 ? "Partner" : "Partners"}
+                  </span>
                 </div>
-                <span className="bg-[#BA90C6]/15 text-[#8E5B9A] text-[10px] font-bold px-2.5 py-1 rounded-full border border-[#BA90C6]/30 shrink-0">
-                  {card.partners?.length} {card.partners?.length === 1 ? "Partner" : "Partners"}
-                </span>
-              </div>
 
-              <div className="pt-2 border-t border-[#BA90C6]/30">
-                <ul className="space-y-2">
-                  {card.partners?.map((p, idx) => (
-                    <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#2A1B3D] font-medium">
-                      <span className="material-symbols-outlined text-xs mt-0.5 text-[#8E5B9A] shrink-0">check_circle</span>
-                      <span className="leading-snug">{p}</span>
-                    </li>
-                  ))}
-                </ul>
+                <div className="pt-2 border-t border-[#BA90C6]/30">
+                  <ul className="space-y-2">
+                    {card.partners?.map((p, idx) => (
+                      <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#2A1B3D] font-medium">
+                        <span className="material-symbols-outlined text-xs mt-0.5 text-[#8E5B9A] shrink-0">check_circle</span>
+                        <span className="leading-snug">{p}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+
+        {/* Swipe Hint */}
+        <div className="flex items-center justify-center gap-2 text-xs text-[#8E5B9A] font-semibold pt-1">
+          <span className="material-symbols-outlined text-sm animate-pulse">swipe_left</span>
+          <span>Swipe left or right to explore partners</span>
+          <span className="material-symbols-outlined text-sm animate-pulse">swipe_right</span>
+        </div>
       </div>
     </div>
   );

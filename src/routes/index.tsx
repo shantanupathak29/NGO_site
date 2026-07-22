@@ -58,10 +58,21 @@ function Home() {
       const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
       const p = Math.min(1, Math.max(0, window.scrollY / max));
       setProgress(p);
+      const currentBg = `rgb(${Math.round(START[0] + (END[0] - START[0]) * p)}, ${Math.round(
+        START[1] + (END[1] - START[1]) * p,
+      )}, ${Math.round(START[2] + (END[2] - START[2]) * p)})`;
+      if (document.body) {
+        document.body.style.backgroundColor = currentBg;
+      }
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (document.body) {
+        document.body.style.backgroundColor = "";
+      }
+    };
   }, []);
 
   const bg = `rgb(${Math.round(START[0] + (END[0] - START[0]) * progress)}, ${Math.round(
@@ -190,7 +201,9 @@ function Home() {
               <h2 className="text-3xl md:text-4xl font-extrabold text-[#FDF4F5]">Why Choose Pragati Path</h2>
               <p className="text-sm text-[#E8A0BF]">Our institutional capacity and grassroot integration make us a trusted partner for sustainable development.</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+            {/* Swipeable Container on Mobile / Grid on Desktop */}
+            <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-5 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-6 px-1 no-scrollbar -mx-6 md:mx-0 px-6 md:px-0">
               {[
                 { title: "20+ Years of Experience", desc: "Two decades of executing impactful socio-economic projects across Bundelkhand.", icon: "history" },
                 { title: "Community-Based Approach", desc: "Active participatory dialogue ensures projects are owned and sustained locally.", icon: "groups" },
@@ -201,14 +214,23 @@ function Home() {
                 { title: "Evidence-Based Programs", desc: "Robust data tracking, social audits, and measurable progress metrics.", icon: "analytics" },
                 { title: "Local Trust & Integration", desc: "Deep-rooted community relationships ensuring high participation and trust.", icon: "favorite" }
               ].map((item, index) => (
-                <MagicContainer key={index} className="h-full">
-                  <div className="p-6 h-60 flex flex-col justify-start space-y-3 rounded-2xl bg-[#2A1B3D]/85 backdrop-blur-md border border-[#BA90C6]/40 shadow-lg hover:border-[#E8A0BF]/60 transition-all">
-                    <span className="material-symbols-outlined text-[#E8A0BF] text-3xl">{item.icon}</span>
-                    <h4 className="text-base font-bold text-[#FDF4F5] min-h-[3rem] flex items-center">{item.title}</h4>
-                    <p className="text-xs text-[#FDF4F5]/80 leading-relaxed">{item.desc}</p>
-                  </div>
-                </MagicContainer>
+                <div key={index} className="w-[82vw] sm:w-[300px] md:w-auto shrink-0 snap-center">
+                  <MagicContainer className="h-full">
+                    <div className="p-6 h-60 flex flex-col justify-start space-y-3 rounded-2xl bg-[#2A1B3D]/85 backdrop-blur-md border border-[#BA90C6]/40 shadow-lg hover:border-[#E8A0BF]/60 transition-all">
+                      <span className="material-symbols-outlined text-[#E8A0BF] text-3xl">{item.icon}</span>
+                      <h4 className="text-base font-bold text-[#FDF4F5] min-h-[3rem] flex items-center">{item.title}</h4>
+                      <p className="text-xs text-[#FDF4F5]/80 leading-relaxed">{item.desc}</p>
+                    </div>
+                  </MagicContainer>
+                </div>
               ))}
+            </div>
+
+            {/* Mobile Touch Swipe Indicator */}
+            <div className="flex md:hidden items-center justify-center gap-2 text-xs text-[#E8A0BF] font-semibold">
+              <span className="material-symbols-outlined text-sm animate-pulse">swipe_left</span>
+              <span>Swipe left or right to explore</span>
+              <span className="material-symbols-outlined text-sm animate-pulse">swipe_right</span>
             </div>
           </div>
         </section>

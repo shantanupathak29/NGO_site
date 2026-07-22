@@ -275,7 +275,8 @@ function About() {
                     <h3 className="text-3xl md:text-4xl font-extrabold text-[#8E5B9A]">Our Focus Areas</h3>
                   </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {/* Swipeable Container on Mobile / Grid on Desktop */}
+                <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-6 px-1 no-scrollbar -mx-6 md:mx-0 px-6 md:px-0">
                   {[
                     { id: 1, title: "Sustainable Agriculture", icon: "agriculture", desc: "Empowering farmers through climate-smart practices, organic cultivation, and strengthening local farm institutions.", subs: ["Farmer Interest Group (FIG) Development", "Climate Smart Agriculture", "Organic Farming", "Natural Farming", "Farmer Producer Organizations (FPOs)", "Digital Farmer Advisory"] },
                     { id: 2, title: "Livelihood Promotion", icon: "work", desc: "Facilitating self-reliance through skill training, micro-enterprises, and market linkage programs.", subs: ["Skill Development", "Entrepreneurship", "Women Self Help Groups (SHGs)", "Youth Employment", "Beekeeping Initiatives", "Market Linkages"] },
@@ -284,16 +285,24 @@ function About() {
                     { id: 5, title: "Women Empowerment", icon: "diversity_3", desc: "Fostering leadership, financial literacy, and social equality among rural and semi-urban women.", subs: ["Leadership Development", "Financial Literacy", "Gender Equality Initiatives", "SHG Capacity Building", "Enterprise Development"] },
                     { id: 6, title: "Water, Sanitation & Environment", icon: "eco", desc: "Conserving resources and implementing clean water and waste management initiatives.", subs: ["Water Conservation", "Rainwater Harvesting", "Jal Tara Initiative", "Tree Plantation & Afforestation", "Climate Adaptation", "WASH Programs"] }
                   ].map((area) => (
-                    <ProgramCard
-                      key={area.id}
-                      title={area.title}
-                      subtitle={area.desc}
-                      highlight="Active"
-                      tag={`0${area.id}`}
-                      icon={area.icon}
-                      subs={area.subs}
-                    />
+                    <div key={area.id} className="w-[85vw] sm:w-[340px] md:w-auto shrink-0 snap-center">
+                      <ProgramCard
+                        title={area.title}
+                        subtitle={area.desc}
+                        highlight="Active"
+                        tag={`0${area.id}`}
+                        icon={area.icon}
+                        subs={area.subs}
+                      />
+                    </div>
                   ))}
+                </div>
+
+                {/* Mobile Touch Swipe Indicator */}
+                <div className="flex md:hidden items-center justify-center gap-2 text-xs text-[#8E5B9A] font-semibold pt-1">
+                  <span className="material-symbols-outlined text-sm animate-pulse">swipe_left</span>
+                  <span>Swipe left or right to explore focus areas</span>
+                  <span className="material-symbols-outlined text-sm animate-pulse">swipe_right</span>
                 </div>
               </section>
             </FadeContent>
