@@ -1,0 +1,138 @@
+.scroll-list-container {
+  position: relative;
+  width: 100%;
+}
+
+.scroll-list {
+  max-height: 480px;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+@media (max-width: 640px) {
+  .scroll-list {
+    max-height: 380px;
+    padding: 8px;
+  }
+}
+
+/* Custom scrollbar matching new color theme */
+.scroll-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scroll-list::-webkit-scrollbar-track {
+  background: #FDF4F5;
+  border-radius: 3px;
+}
+
+.scroll-list::-webkit-scrollbar-thumb {
+  background: #BA90C6/30;
+  background-color: rgba(186, 144, 198, 0.3);
+  border-radius: 3px;
+}
+
+.scroll-list::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(186, 144, 198, 0.6);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Cards styled with new colors */
+.item {
+  padding: 20px;
+  background-color: #FDF4F5;
+  border: 1px solid #BA90C6;
+  border-radius: 16px;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(186, 144, 198, 0.04);
+}
+
+@media (max-width: 640px) {
+  .item {
+    padding: 12px 14px;
+    border-radius: 14px;
+  }
+}
+
+.item:hover {
+  border-color: #E8A0BF;
+  box-shadow: 0 6px 16px rgba(186, 144, 198, 0.08);
+}
+
+.item.selected {
+  background-color: #FDF4F5;
+  border-color: #BA90C6;
+  box-shadow: 0 0 0 2px rgba(186, 144, 198, 0.15), 0 8px 24px rgba(186, 144, 198, 0.1);
+}
+
+.project-title {
+  color: #8E5B9A;
+  font-weight: 700;
+  font-size: 1rem;
+  margin: 0 0 4px 0;
+}
+
+.project-partner {
+  color: #2A1B3D;
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin: 0 0 6px 0;
+}
+
+.project-activity {
+  color: #2A1B3D;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.4;
+  opacity: 0.85;
+}
+
+.project-period-badge {
+  background-color: rgba(142, 91, 154, 0.15);
+  color: #2A1B3D;
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  align-self: flex-start;
+  white-space: nowrap;
+}
+
+.selected .project-period-badge {
+  background-color: #BA90C6;
+  color: #FDF4F5;
+}
+
+/* Gradients matching the pinkish light background #FDF4F5 */
+.top-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(to bottom, #FDF4F5, transparent);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 5;
+}
+
+.bottom-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(to top, #FDF4F5, transparent);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 5;
+}

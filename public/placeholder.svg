@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FDF4F5"/>
+      <stop offset="45%" stop-color="#E8A0BF"/>
+      <stop offset="75%" stop-color="#BA90C6"/>
+      <stop offset="100%" stop-color="#C0DBEA"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#g)"/>
+  <g fill="none" stroke="#874c67" stroke-opacity="0.35" stroke-width="2">
+    <circle cx="400" cy="300" r="120"/>
+    <circle cx="400" cy="300" r="80"/>
+    <circle cx="400" cy="300" r="40"/>
+  </g>
+  <text x="400" y="315" text-anchor="middle" font-family="sans-serif" font-size="28" fill="#874c67" font-weight="600" letter-spacing="4">PRAGATI PATH</text>
+</svg>
