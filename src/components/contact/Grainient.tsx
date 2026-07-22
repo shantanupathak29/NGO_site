@@ -164,109 +164,123 @@ const Grainient = ({
     const container = containerRef.current;
     if (!container) return;
 
-    const renderer = new Renderer({
-      webgl: 2,
-      alpha: true,
-      antialias: false,
-      dpr: Math.min(window.devicePixelRatio || 1, 2)
-    });
+    let renderer: Renderer | null = null;
+    let canvas: HTMLCanvasElement | null = null;
 
-    const gl = renderer.gl;
-    const canvas = gl.canvas;
-    canvas.style.width = '100%';
-    canvas.style.height = '100%';
-    canvas.style.display = 'block';
-    container.appendChild(canvas);
+    try {
+      renderer = new Renderer({
+        webgl: 2,
+        alpha: true,
+        antialias: false,
+        dpr: Math.min(window.devicePixelRatio || 1, 2)
+      });
 
-    const geometry = new Triangle(gl);
-    const program = new Program(gl, {
-      vertex,
-      fragment,
-      uniforms: {
-        iTime:           { value: 0 },
-        iResolution:     { value: new Float32Array([1, 1]) },
-        uTimeSpeed:      { value: 0.25 },
-        uColorBalance:   { value: 0.0 },
-        uWarpStrength:   { value: 1.0 },
-        uWarpFrequency:  { value: 5.0 },
-        uWarpSpeed:      { value: 2.0 },
-        uWarpAmplitude:  { value: 50.0 },
-        uBlendAngle:     { value: 0.0 },
-        uBlendSoftness:  { value: 0.05 },
-        uRotationAmount: { value: 500.0 },
-        uNoiseScale:     { value: 2.0 },
-        uGrainAmount:    { value: 0.1 },
-        uGrainScale:     { value: 2.0 },
-        uGrainAnimated:  { value: 0.0 },
-        uContrast:       { value: 1.5 },
-        uGamma:          { value: 1.0 },
-        uSaturation:     { value: 1.0 },
-        uCenterOffset:   { value: new Float32Array([0, 0]) },
-        uZoom:           { value: 0.9 },
-        uColor1:         { value: new Float32Array([1, 1, 1]) },
-        uColor2:         { value: new Float32Array([1, 1, 1]) },
-        uColor3:         { value: new Float32Array([1, 1, 1]) }
-      }
-    });
+      const gl = renderer.gl;
+      canvas = gl.canvas;
+      canvas.style.width = '100%';
+      canvas.style.height = '100%';
+      canvas.style.display = 'block';
+      container.appendChild(canvas);
 
-    const mesh = new Mesh(gl, { geometry, program });
-    ctxMap.set(container, { renderer, program, mesh });
+      const geometry = new Triangle(gl);
+      const program = new Program(gl, {
+        vertex,
+        fragment,
+        uniforms: {
+          iTime:           { value: 0 },
+          iResolution:     { value: new Float32Array([1, 1]) },
+          uTimeSpeed:      { value: 0.25 },
+          uColorBalance:   { value: 0.0 },
+          uWarpStrength:   { value: 1.0 },
+          uWarpFrequency:  { value: 5.0 },
+          uWarpSpeed:      { value: 2.0 },
+          uWarpAmplitude:  { value: 50.0 },
+          uBlendAngle:     { value: 0.0 },
+          uBlendSoftness:  { value: 0.05 },
+          uRotationAmount: { value: 500.0 },
+          uNoiseScale:     { value: 2.0 },
+          uGrainAmount:    { value: 0.1 },
+          uGrainScale:     { value: 2.0 },
+          uGrainAnimated:  { value: 0.0 },
+          uContrast:       { value: 1.5 },
+          uGamma:          { value: 1.0 },
+          uSaturation:     { value: 1.0 },
+          uCenterOffset:   { value: new Float32Array([0, 0]) },
+          uZoom:           { value: 0.9 },
+          uColor1:         { value: new Float32Array([1, 1, 1]) },
+          uColor2:         { value: new Float32Array([1, 1, 1]) },
+          uColor3:         { value: new Float32Array([1, 1, 1]) }
+        }
+      });
 
-    const setSize = () => {
-      const rect = container.getBoundingClientRect();
-      const w = Math.max(1, Math.floor(rect.width));
-      const h = Math.max(1, Math.floor(rect.height));
-      renderer.setSize(w, h);
-      const res = program.uniforms.iResolution.value as Float32Array;
-      res[0] = gl.drawingBufferWidth;
-      res[1] = gl.drawingBufferHeight;
-      renderer.render({ scene: mesh });
-    };
+      const mesh = new Mesh(gl, { geometry, program });
+      ctxMap.set(container, { renderer, program, mesh });
 
-    const ro = new ResizeObserver(setSize);
-    ro.observe(container);
-    setSize();
+      const setSize = () => {
+        const rect = container.getBoundingClientRect();
+        const w = Math.max(1, Math.floor(rect.width));
+        const h = Math.max(1, Math.floor(rect.height));
+        renderer?.setSize(w, h);
+        const res = program.uniforms.iResolution.value as Float32Array;
+        res[0] = gl.drawingBufferWidth;
+        res[1] = gl.drawingBufferHeight;
+        renderer?.render({ scene: mesh });
+      };
 
-    let raf = 0;
-    let isVisible = true;
-    let isPageVisible = !document.hidden;
-    const t0 = performance.now();
+      const ro = new ResizeObserver(setSize);
+      ro.observe(container);
+      setSize();
 
-    const loop = (t: number) => {
-      program.uniforms.iTime.value = (t - t0) * 0.001;
-      renderer.render({ scene: mesh });
-      raf = requestAnimationFrame(loop);
-    };
+      let raf = 0;
+      let isVisible = true;
+      let isPageVisible = !document.hidden;
+      const t0 = performance.now();
 
-    const tryStart = () => {
-      if (isVisible && isPageVisible && raf === 0) raf = requestAnimationFrame(loop);
-    };
-    const tryStop = () => {
-      if (raf !== 0) { cancelAnimationFrame(raf); raf = 0; }
-    };
+      const loop = (t: number) => {
+        try {
+          program.uniforms.iTime.value = (t - t0) * 0.001;
+          renderer?.render({ scene: mesh });
+          raf = requestAnimationFrame(loop);
+        } catch (err) {
+          console.warn("Grainient loop error:", err);
+        }
+      };
 
-    const io = new IntersectionObserver(
-      ([entry]) => { isVisible = entry.isIntersecting; isVisible ? tryStart() : tryStop(); },
-      { threshold: 0 }
-    );
-    io.observe(container);
+      const tryStart = () => {
+        if (isVisible && isPageVisible && raf === 0) raf = requestAnimationFrame(loop);
+      };
+      const tryStop = () => {
+        if (raf !== 0) { cancelAnimationFrame(raf); raf = 0; }
+      };
 
-    const onVisibility = () => {
-      isPageVisible = !document.hidden;
-      isPageVisible ? tryStart() : tryStop();
-    };
-    document.addEventListener('visibilitychange', onVisibility);
+      const io = new IntersectionObserver(
+        ([entry]) => { isVisible = entry.isIntersecting; isVisible ? tryStart() : tryStop(); },
+        { threshold: 0 }
+      );
+      io.observe(container);
 
-    tryStart();
+      const onVisibility = () => {
+        isPageVisible = !document.hidden;
+        isPageVisible ? tryStart() : tryStop();
+      };
+      document.addEventListener('visibilitychange', onVisibility);
 
-    return () => {
-      tryStop();
-      ro.disconnect();
-      io.disconnect();
-      document.removeEventListener('visibilitychange', onVisibility);
-      ctxMap.delete(container);
-      try { container.removeChild(canvas); } catch { /* ignore */ }
-    };
+      tryStart();
+
+      return () => {
+        tryStop();
+        ro.disconnect();
+        io.disconnect();
+        document.removeEventListener('visibilitychange', onVisibility);
+        ctxMap.delete(container);
+        if (canvas && canvas.parentNode === container) {
+          try { container.removeChild(canvas); } catch { /* ignore */ }
+        }
+      };
+    } catch (err) {
+      console.warn("Grainient WebGL init failed, using CSS background:", err);
+      return () => {};
+    }
   }, []);
 
   useEffect(() => {

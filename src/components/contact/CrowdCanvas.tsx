@@ -61,29 +61,36 @@ export function CrowdCanvas() {
     };
 
     const render = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.save();
-      ctx.scale(devicePixelRatio, devicePixelRatio);
-      peeps
-        .slice()
-        .sort((a, b) => a.y - b.y)
-        .forEach((p) => {
-          // body
-          ctx.fillStyle = p.color;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y + p.r * 1.6, p.r, 0, Math.PI * 2);
-          ctx.fill();
-          // head
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r * 0.7, 0, Math.PI * 2);
-          ctx.fill();
-          // shadow
-          ctx.fillStyle = "rgba(142,88,214,0.15)";
-          ctx.beginPath();
-          ctx.ellipse(p.x, p.y + p.r * 2.7, p.r * 0.9, p.r * 0.22, 0, 0, Math.PI * 2);
-          ctx.fill();
-        });
-      ctx.restore();
+      try {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.scale(devicePixelRatio, devicePixelRatio);
+        peeps
+          .slice()
+          .sort((a, b) => a.y - b.y)
+          .forEach((p) => {
+            const safeR = Math.max(1, p.r);
+            // body
+            ctx.fillStyle = p.color;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y + safeR * 1.6, safeR, 0, Math.PI * 2);
+            ctx.fill();
+            // head
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, safeR * 0.7, 0, Math.PI * 2);
+            ctx.fill();
+            // shadow
+            ctx.fillStyle = "rgba(142,88,214,0.15)";
+            ctx.beginPath();
+            const rx = Math.max(0.1, safeR * 0.9);
+            const ry = Math.max(0.1, safeR * 0.22);
+            ctx.ellipse(p.x, p.y + safeR * 2.7, rx, ry, 0, 0, Math.PI * 2);
+            ctx.fill();
+          });
+        ctx.restore();
+      } catch (err) {
+        console.warn("CrowdCanvas render error:", err);
+      }
     };
 
     const resize = () => {
